@@ -1,0 +1,37 @@
+<div><input type="color" id="c1" style="height: 50%; width: 100%;"/></div>
+<div><input type="color" id="c2" style="height: 50%; width: 100%;" /></div>
+
+<script>
+
+    var color1 = '#ffffff';
+    var color2 = '#ffffff';
+
+    function post(path, params) {
+        var xhttp = new XMLHttpRequest();
+        path += '?';
+        if( params.c1 ) {path += 'c1=' + params.c1 + '&';}
+        if( params.c2 ) {path += 'c2=' + params.c2;}
+        xhttp.open('POST', path, true);
+        xhttp.send();
+    }
+
+    var c1 = document.getElementById('c1');
+    var c2 = document.getElementById('c2');
+
+    c1.value = color1;
+    c2.value = color2;
+
+    c1.addEventListener('change', (event) => {
+        var color = event.target.value.slice(1);
+        post('/color', {c1: color});
+    }, false);
+
+
+    c2.addEventListener('change', (event) => {
+        var color = event.target.value.slice(1);
+        post('/color', {c2: color});
+    }, false);
+    
+</script>
+
+
